@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import type { ReactNode } from "react";
 import type { Dispatch, SetStateAction } from "react";
 import type { usePopover } from "./usePopover";
@@ -17,4 +18,15 @@ export interface PopoverProps {
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
   children?: ReactNode;
+}
+
+export interface PopoverContentProps {
+  children: ReactNode;
+  closeOnFocusOut?: boolean;
+  style?: CSSProperties;
+  className?: string;
+}
+
+export interface PopoverTriggerProps {
+  children: ReactNode;
 }

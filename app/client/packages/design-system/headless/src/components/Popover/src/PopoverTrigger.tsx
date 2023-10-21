@@ -1,23 +1,22 @@
+import { isValidElement, forwardRef, cloneElement } from "react";
 import { useMergeRefs } from "@floating-ui/react";
-import React from "react";
-import { usePopoverContext } from "./Popover";
+import { usePopoverContext } from "./PopoverContext";
 
-interface PopoverTriggerProps {
-  children: React.ReactNode;
-  asChild?: boolean;
-}
+import type { Ref } from "react";
+import type { PopoverTriggerProps } from "./types";
 
-export const PopoverTrigger = React.forwardRef<
-  HTMLElement,
-  React.HTMLProps<HTMLElement> & PopoverTriggerProps
->(function PopoverTrigger({ asChild = false, children, ...props }, propRef) {
+const _PopoverTrigger = (
+  props: PopoverTriggerProps,
+  propRef: Ref<HTMLElement>,
+) => {
+  const { children } = props;
   const context = usePopoverContext();
-  const childrenRef = (children as any).ref;
+  // @ts-expect-error we don't know which type children will be
+  const childrenRef = (children as unknown).ref;
   const ref = useMergeRefs([context.refs.setReference, propRef, childrenRef]);
 
-  // `asChild` allows the user to pass any element as the anchor
-  if (Boolean(asChild) && React.isValidElement(children)) {
-    return React.cloneElement(
+  if (isValidElement(children)) {
+    return cloneElement(
       children,
       context.getReferenceProps({
         ref,
@@ -28,15 +27,7 @@ export const PopoverTrigger = React.forwardRef<
     );
   }
 
-  return (
-    <button
-      // The user can style the trigger based on the state
-      data-state={context.open ? "open" : "closed"}
-      ref={ref}
-      type="button"
-      {...context.getReferenceProps(props)}
-    >
-      {children}
-    </button>
-  );
-});
+  return null;
+};
+
+export const PopoverTrigger = forwardRef(_PopoverTrigger);

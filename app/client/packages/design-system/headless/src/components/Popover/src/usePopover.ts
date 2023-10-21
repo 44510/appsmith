@@ -31,6 +31,7 @@ export function usePopover({
     placement,
     open,
     onOpenChange: setOpen,
+    strategy: "fixed",
     whileElementsMounted: autoUpdate,
     middleware: [
       offset(5),

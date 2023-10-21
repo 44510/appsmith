@@ -4,36 +4,41 @@ import {
   FloatingPortal,
   useMergeRefs,
 } from "@floating-ui/react";
-import { usePopoverContext } from "./Popover";
+import { usePopoverContext } from "./PopoverContext";
 
-import type { HTMLProps } from "react";
+import type { Ref } from "react";
+import type { PopoverContentProps } from "./types";
 
-// eslint-disable-next-line react/display-name
-export const PopoverContent = forwardRef<
-  HTMLDivElement,
-  HTMLProps<HTMLDivElement>
->(({ children }, ref) => {
+const _PopoverContent = (props: PopoverContentProps, ref: Ref<HTMLElement>) => {
+  const { children, className, closeOnFocusOut = false, style } = props;
   const { context, descriptionId, labelId, modal, open } = usePopoverContext();
   const refs = useMergeRefs([context.refs.setFloating, ref]);
 
   if (!Boolean(open)) return null;
 
+  const root = context.refs.domReference.current?.closest(
+    "[data-theme-provider]",
+  ) as HTMLElement;
+
   return (
-    <FloatingPortal>
+    <FloatingPortal root={root}>
       <FloatingFocusManager
-        closeOnFocusOut={false}
+        closeOnFocusOut={closeOnFocusOut}
         context={context}
         modal={modal}
       >
         <div
           aria-describedby={descriptionId}
           aria-labelledby={labelId}
+          className={className}
           ref={refs}
-          style={{ ...context.floatingStyles, zIndex: 20 }}
+          style={{ ...context.floatingStyles, ...style }}
         >
           {children}
         </div>
       </FloatingFocusManager>
     </FloatingPortal>
   );
-});
+};
+
+export const PopoverContent = forwardRef(_PopoverContent);

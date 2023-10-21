@@ -1,19 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import { usePopover } from "./usePopover";
+import { PopoverContext } from "./PopoverContext";
 
-import type { ContextType, PopoverProps } from "./types";
-
-const PopoverContext = React.createContext<ContextType>(null);
-
-export const usePopoverContext = () => {
-  const context = useContext(PopoverContext);
-
-  if (context == null) {
-    throw new Error("Popover components must be wrapped in <Popover />");
-  }
-
-  return context;
-};
+import type { PopoverProps } from "./types";
 
 export const Popover = (props: PopoverProps) => {
   const { children, modal = false, ...rest } = props;

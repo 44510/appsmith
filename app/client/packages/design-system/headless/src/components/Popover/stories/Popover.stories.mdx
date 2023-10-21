@@ -1,0 +1,70 @@
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  Button,
+} from "@design-system/headless";
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+
+<Meta
+  title="Design-system/Headless/Popover"
+  component={Popover}
+  args={{
+    open: undefined,
+    onOpenChange: undefined,
+  }}
+/>
+
+export const Template = (args) => {
+  return (
+    <Popover {...args}>
+      <PopoverTrigger>
+        <Button>My trigger</Button>
+      </PopoverTrigger>
+      <PopoverContent>My popover</PopoverContent>
+    </Popover>
+  );
+};
+
+# Popover
+
+It is necessary to write some text
+
+<Canvas>
+  <Story name="popover">{Template.bind({})}</Story>
+</Canvas>
+
+<ArgsTable story="popover" of={Popover} />
+
+# Placement
+
+The placement of the popover can be changed by passing the `placement` prop.
+
+<Canvas>
+  <Story name="popover placement">
+    <Popover placement="left">
+      <PopoverTrigger>
+        <Button>Left</Button>
+      </PopoverTrigger>
+      <PopoverContent>My popover</PopoverContent>
+    </Popover>
+    <Popover placement="top">
+      <PopoverTrigger>
+        <Button>Top</Button>
+      </PopoverTrigger>
+      <PopoverContent>My popover</PopoverContent>
+    </Popover>
+    <Popover placement="bottom">
+      <PopoverTrigger>
+        <Button>Bottom</Button>
+      </PopoverTrigger>
+      <PopoverContent>My popover</PopoverContent>
+    </Popover>
+    <Popover placement="right">
+      <PopoverTrigger>
+        <Button>Right</Button>
+      </PopoverTrigger>
+      <PopoverContent>My popover</PopoverContent>
+    </Popover>
+  </Story>
+</Canvas>
