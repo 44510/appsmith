@@ -482,7 +482,7 @@ else
   export HOSTNAME="heroku_dyno"
 fi
 
-#check_setup_custom_ca_certificates
+check_setup_custom_ca_certificates
 setup-custom-ca-certificates
 
 mount_letsencrypt_directory

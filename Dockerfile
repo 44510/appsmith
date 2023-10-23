@@ -38,8 +38,8 @@ LABEL com.centurylinklabs.watchtower.lifecycle.pre-check=/watchtower-hooks/pre-c
 LABEL com.centurylinklabs.watchtower.lifecycle.pre-update=/watchtower-hooks/pre-update.sh
 
 RUN mkdir -p /.mongodb/mongosh /appsmith-stacks \
-  && chmod -R ugo+w /var/lib/nginx /var/log/nginx /var/run /usr/sbin/cron /.mongodb /appsmith-stacks \
-  && chmod ugo+w /etc
+  && chmod ugo+w /etc /appsmith-stacks \
+  && chmod -R ugo+w /var/lib/nginx /var/log/nginx /var/run /usr/sbin/cron /.mongodb /etc/ssl
 
 EXPOSE 80
 EXPOSE 443
