@@ -3,6 +3,8 @@
 set -e
 set -o xtrace
 
+echo "Running as: $(id)"
+
 stacks_path=/appsmith-stacks
 
 export SUPERVISORD_CONF_TARGET="$TMP/supervisor-conf.d/"  # export for use in supervisord.conf

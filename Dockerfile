@@ -37,9 +37,6 @@ RUN cd ./utils && npm install --only=prod && npm install --only=prod -g . && cd 
 LABEL com.centurylinklabs.watchtower.lifecycle.pre-check=/watchtower-hooks/pre-check.sh
 LABEL com.centurylinklabs.watchtower.lifecycle.pre-update=/watchtower-hooks/pre-update.sh
 
-RUN useradd --no-log-init --system --gid 42 --uid 42 --user-group smith
-#USER 42
-
 RUN mkdir -p /.mongodb/mongosh /appsmith-stacks \
   && chmod -R ugo+w /var/lib/nginx /var/log/nginx /var/run /usr/sbin/cron /.mongodb /appsmith-stacks \
   && chmod ugo+w /etc
