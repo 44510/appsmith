@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 set -e
-set -o xtrace
 
 echo "Running as: $(id)"
 
